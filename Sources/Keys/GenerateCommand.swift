@@ -6,6 +6,7 @@ import SwiftCLI
 
 class GenerateCommand: Command {
     let name = "generate"
+    let shortDescription = "Generates a swift class containing your keys"
     
     let spec = Key<Path>(
         "-s",
@@ -20,36 +21,17 @@ class GenerateCommand: Command {
     )
 
     func execute() throws {
-        let keySpecPath = (spec.value ?? "keys.yml").absolute()
-
-        guard keySpecPath.exists else {
-            throw GenerateError.missingKeySpec(keySpecPath)
-        }
-
-        let keySpec = try KeySpec(path: keySpecPath)
+        let keySpec = try KeySpec(path: spec.value)
 
         let outputPath = (output.value ?? keySpec.outputPath).absolute()
 
         stdout <<< "🏭 Generating \(outputPath)..."
 
-        let keychain = Keychain(service: "com.livefront.keys.\(keySpec.name)")
-
-        var secrets: [[String: String]] = []
-
-        for key in keySpec.keys {
-            guard let value = keychain[key] else {
-                throw GenerateError.missingKey(key)   
-            }
-
-            secrets.append([
-                "key": key,
-                "value": value,
-            ])              
-        }
-
+        let keyStore = KeyStore(spec: keySpec)
+        let keys = try keyStore.generate()
         let context: [String: Any] = [
             "name": keySpec.name,
-            "secrets": secrets
+            "keys": keys
         ]
 
         let fsLoader = FileSystemLoader(paths: ["Templates/"])

@@ -1,6 +1,6 @@
 import Foundation
 import SwiftCLI
 
-let keysCLI = CLI(name: "keys")
-keysCLI.commands = [SetupCommand(), GenerateCommand()]
-keysCLI.goAndExit()
+let cli = CLI(name: "keys")
+cli.commands = [SetupCommand(), GenerateCommand()]
+cli.goAndExit()

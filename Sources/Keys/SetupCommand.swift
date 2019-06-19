@@ -5,7 +5,8 @@ import SwiftCLI
 
 class SetupCommand: Command {
     let name = "setup"
-    
+    let shortDescription = "Ensure keys are setup correctly in the keychain"
+
     let spec = Key<Path>(
         "-s",
         "--spec",
@@ -13,16 +14,16 @@ class SetupCommand: Command {
     )
 
     func execute() throws {
-        let keySpecPath = (spec.value ?? "keys.yml").absolute()
-        let keySpec = try KeySpec(path: keySpecPath)
+        let keySpec = try KeySpec(path: spec.value)
 
-        let keychain = Keychain(service: "com.livefront.keys.\(keySpec.name)")
-        for key in keySpec.keys {
-            if keychain[key] == nil {
-                stdout <<< "❌ Keys has detected a missing keychain value."
-                stdout <<< "🔑 What is the key for \(key, color: .green)"
-                keychain[key] = Input.readLine(prompt: ">", secure: true)
-            }
+        let keyStore = KeyStore(spec: keySpec)
+
+        do {
+            try keyStore.validate()
+        } catch KeySpecError.missingKey(let key) {
+            stdout <<< "❌ Keys has detected a missing keychain value."
+            stdout <<< "🔑 What is the key for \(key, color: .green)"
+            keyStore[key] = Input.readLine(prompt: ">", secure: true)
         }
 
         stdout <<< "✅ All keys found. Ready to generate."
