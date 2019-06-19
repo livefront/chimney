@@ -4,6 +4,9 @@ import PackageDescription
 
 let package = Package(
     name: "Keys",
+    products: [
+        .executable(name: "keys", targets: ["Keys"]),
+    ],
     dependencies: [
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", from: "3.2.0"),
         .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.0"),
