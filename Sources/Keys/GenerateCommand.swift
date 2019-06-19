@@ -34,7 +34,14 @@ class GenerateCommand: Command {
             "keys": keys
         ]
 
-        let fsLoader = FileSystemLoader(paths: ["Templates/"])
+        let bundlePath = Path(Bundle.main.bundlePath)
+        let relativePath = Path("Templates")
+        let fsLoader = FileSystemLoader(paths: [
+            relativePath,
+            bundlePath,
+            bundlePath + relativePath
+        ])
+        stdout <<< fsLoader.description
         let environment = Environment(loader: fsLoader)
     
         let rendered = try environment.renderTemplate(name: "keys.stencil", context: context)
