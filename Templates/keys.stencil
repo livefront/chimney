@@ -1,7 +1,7 @@
 import Foundation
 
 class {{ name }}Keys {
-    {% for key in keys %}    
+    {% for key in keys %}
     static let {{ key.name }} = "{{ key.value }}"
     {% endfor %}
 }

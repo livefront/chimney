@@ -15,15 +15,16 @@ class SetupCommand: Command {
 
     func execute() throws {
         let keySpec = try KeySpec(path: spec.value)
-
         let keyStore = KeyStore(spec: keySpec)
 
         do {
-            try keyStore.validate()
-        } catch KeySpecError.missingKey(let key) {
-            stdout <<< "❌ Keys has detected a missing keychain value."
-            stdout <<< "🔑 What is the key for \(key, color: .green)"
-            keyStore[key] = Input.readLine(prompt: ">", secure: true)
+            try keyStore.generate()
+        } catch KeySpecError.missingKeys(let keys) {
+            for key in keys {
+                stdout <<< "❌ Keys has detected a missing keychain value."
+                stdout <<< "🔑 What is the key for \(key, color: .green)"
+                keyStore[key] = Input.readLine(prompt: ">", secure: true)
+            }
         }
 
         stdout <<< "✅ All keys found. Ready to generate."

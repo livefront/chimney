@@ -22,7 +22,6 @@ class GenerateCommand: Command {
 
     func execute() throws {
         let keySpec = try KeySpec(path: spec.value)
-
         let outputPath = (output.value ?? keySpec.outputPath).absolute()
 
         stdout <<< "🏭 Generating \(outputPath)..."
@@ -41,9 +40,7 @@ class GenerateCommand: Command {
             bundlePath,
             bundlePath + relativePath
         ])
-        stdout <<< fsLoader.description
-        let environment = Environment(loader: fsLoader)
-    
+        let environment = Environment(loader: fsLoader)    
         let rendered = try environment.renderTemplate(name: "keys.stencil", context: context)
         try outputPath.write(rendered)
     }

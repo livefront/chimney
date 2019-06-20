@@ -1,6 +1,11 @@
 import Foundation
 import KeychainAccess
 
+struct KeyEntry {
+    let name: String
+    let value: String
+}
+
 class KeyStore {
     let spec: KeySpec
     let keychain: Keychain
@@ -22,26 +27,21 @@ class KeyStore {
         }
     }
 
-    func validate() throws {
+    @discardableResult
+    func generate() throws -> [KeyEntry] {
+        var keys: [KeyEntry] = []
+        var missing: [String] = []
+
         for key in spec.keys {
-            if self[key] == nil {
-                throw KeySpecError.missingKey(key)
+            if let value = self[key] {
+                keys.append(KeyEntry(name: key, value: value))
+            } else {
+                missing.append(key)
             }
         }
-    }
 
-    func generate() throws -> [[String: String]] {
-        var keys: [[String: String]] = []
-
-        for key in spec.keys {
-            guard let value = self[key] else {
-                throw KeySpecError.missingKey(key)   
-            }
-
-            keys.append([
-                "name": key,
-                "value": value,
-            ])              
+        guard missing.isEmpty else {
+            throw KeySpecError.missingKeys(missing)
         }
 
         return keys

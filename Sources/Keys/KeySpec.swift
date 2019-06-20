@@ -1,5 +1,4 @@
 import Foundation
-import KeychainAccess
 import PathKit
 import Yams
 
@@ -21,16 +20,5 @@ struct KeySpec: Codable {
 
         let decoder = YAMLDecoder()
         self = try decoder.decode(KeySpec.self, from: yml)
-    }
-
-    func validate() throws {
-        let keychain = Keychain(service: "com.livefront.keys.\(name)")
-
-        for key in keys {
-            let value = ProcessInfo.processInfo.environment[key] ?? keychain[key]
-            guard value != nil else {
-                throw KeySpecError.missingKey(key)   
-            }
-        }
     }
 }
