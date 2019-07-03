@@ -20,7 +20,7 @@ class KeyStore {
 
     subscript(_ key: String) -> String? {
         get {
-            return environment[key] ?? keychain[key]
+            return environment["KEYS_\(key.snakeCased())"] ?? keychain[key]
         }
         set {
             keychain[key] = newValue
@@ -46,5 +46,4 @@ class KeyStore {
 
         return keys
     }
-} 
-
+}
