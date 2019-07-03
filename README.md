@@ -111,7 +111,12 @@ If you want to ensure that the file is kept up to date, add a build phase to you
 
 ## Continuous integration
 
-When running on an environment where you don't have access to the Keychain, such as a CI server, you can also define environment variables which will be used instead to generate the Swift class. The names of the variables must match the names of the keys you have specified in `keys.yml`.
+When running on an environment where you don't have access to the Keychain, such as a CI server, you can also define environment variables which will be used instead to generate the Swift class. The names of the variables will be the SCREAMING_SNAKE_CASE version of the keys you have specified in `keys.yml`, prefixed with `KEYS`.
+
+| keys.yml     | Environment variable |
+| ------------ | -------------------- | 
+| APISecret    | KEYS_API_SECRET      |
+| SuperSecret1 | KEYS_SUPER_SECRET1   |
 
 ## Attributions
 
