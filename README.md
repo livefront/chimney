@@ -101,13 +101,33 @@ Once the file is generated, go ahead and add it to your project in Xcode, but al
 MyProjectKeys.swift
 ```
 
-If you want to ensure that the file is kept up to date, add a build phase to your app's target:
+If you want to ensure that the file is kept up to date automatically, add a Run Script build phase to your app's target:
+
+#### Xcode
 
 1. Select your app's target from the Xcode project file.
 2. On the Build Phases tab, press the `+` button.
 3. Select `New Run Script Phase`.
 4. Drag the newly created `Run Script` entry so it is above `Compile Sources`.
 5. Enter `keys generate` in the script editor. (Or if using Mint, `mint run livefront/keys keys generate`.)
+
+#### Xcodegen
+
+1. In your `project.yml`, add a path to your generated class in the app's main target with the flag `optional: true`.
+2. Add a script to your `preBuildScripts` section that runs `keys generate`. (Or if using Mint, `mint run livefront/keys keys generate`.)
+
+Example `project.yml`:
+```yml
+targets:
+  MyProject:
+    sources:
+      - path: Sources
+      - path: MyProjectKeys.swift
+        optional: true
+    preBuildScripts:
+      - script: keys generate
+        name: Keys
+```
 
 ## Continuous integration
 
