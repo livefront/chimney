@@ -3,9 +3,9 @@
 import PackageDescription
 
 let package = Package(
-    name: "Keys",
+    name: "Chimney",
     products: [
-        .executable(name: "keys", targets: ["Keys"]),
+        .executable(name: "chimney", targets: ["Chimney"]),
     ],
     dependencies: [
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", from: "3.2.0"),
@@ -16,7 +16,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Keys",
+            name: "Chimney",
             dependencies: [
                 "KeychainAccess",
                 "PathKit",
@@ -25,7 +25,7 @@ let package = Package(
                 "Yams",
             ]),
         .testTarget(
-            name: "KeysTests",
-            dependencies: ["Keys"]),
+            name: "ChimneyTests",
+            dependencies: ["Chimney"]),
     ]
 )

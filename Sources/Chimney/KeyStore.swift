@@ -14,7 +14,7 @@ class KeyStore {
     init(spec: KeySpec) {
         self.spec = spec
 
-        keychain = Keychain(service: "com.livefront.keys.\(spec.name)")
+        keychain = Keychain(service: "com.livefront.chimney.\(spec.name)")
         environment = ProcessInfo.processInfo.environment
     }
 

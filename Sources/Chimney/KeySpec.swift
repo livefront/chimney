@@ -11,7 +11,7 @@ struct KeySpec: Codable {
     }
 
     init(path: Path?) throws {
-        let keySpecPath = (path ?? "keys.yml").absolute()
+        let keySpecPath = (path ?? "chimney.yml").absolute()
         guard keySpecPath.exists else {
             throw KeySpecError.missingKeySpec(keySpecPath)
         }

@@ -1,6 +1,6 @@
 import Foundation
 import SwiftCLI
 
-let cli = CLI(name: "keys")
+let cli = CLI(name: "chimney")
 cli.commands = [SetupCommand(), GenerateCommand()]
 cli.goAndExit()

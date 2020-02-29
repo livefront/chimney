@@ -11,7 +11,7 @@ class GenerateCommand: Command {
     let spec = Key<Path>(
         "-s",
         "--spec",
-        description: "The path to the key spec file. Defaults to keys.yml"
+        description: "The path to the key spec file. Defaults to chimney.yml"
     )
 
     let output = Key<Path>(
@@ -41,7 +41,7 @@ class GenerateCommand: Command {
             bundlePath + relativePath
         ])
         let environment = Environment(loader: fsLoader)    
-        let rendered = try environment.renderTemplate(name: "keys.stencil", context: context)
+        let rendered = try environment.renderTemplate(name: "chimney.stencil", context: context)
         try outputPath.write(rendered)
     }
 }
