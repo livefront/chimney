@@ -9,7 +9,7 @@ enum KeySpecError: Error, ProcessError {
     var message: String? {
         switch self {
             case .missingKeys(let keys):
-                return "\("Error:", color: .red) No value found in keychain for \(keys, color: .green). Run \("keys setup", color: .magenta) to enter missing values."
+                return "\("Error:", color: .red) No value found in keychain for \(keys, color: .green). Run \("chimney setup", color: .magenta) to enter missing values."
             case .missingKeySpec(let path):
                 return "\("Error:", color: .red) No spec found at \(path.absolute())"
         }

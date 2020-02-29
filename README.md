@@ -1,7 +1,7 @@
-# keys
+# Chimney
 A Swift command line tool for managing application keys.
 
-Keys enables you to store secrets in developer's keychains instead of committing them to source control.
+Chimney enables you to store secrets in developer's keychains instead of committing them to source control.
 
 ## Requirements
 
@@ -12,7 +12,7 @@ Xcode 10.2
 ### Mint
 
 ```
-mint install livefront/keys
+mint install livefront/chimney
 ```
 
 ### Swift Package Manager
@@ -20,21 +20,21 @@ mint install livefront/keys
 #### From the command line
 
 ```
-git clone https://github.com/livefront/keys.git
-cd keys
-swift run keys
+git clone https://github.com/livefront/chimney.git
+cd chimney
+swift run chimney
 ```
 
 #### As a dependency
 
 In your Package.swift:
 ```
-.package(url: "https://github.com/livefront/keys.git", from: "0.1.0"),
+.package(url: "https://github.com/livefront/chimney.git", from: "0.1.0"),
 ```
 
 ## Usage
 
-Add a `keys.yml` file to your project folder with a list of the keys you want to manage:
+Add a `chimney.yml` file to your project folder with a list of the keys you want to manage:
 
 ```yaml
 name: "MyProject"
@@ -47,15 +47,15 @@ keys:
 
 Run `setup`:
 ```
-keys setup
+chimney setup
 ```
 
 The first time, it will ask you to provide values for each key.
 ```
-❌ Keys has detected a missing keychain value.
+❌ Chimney has detected a missing keychain value.
 🔑 What is the key for APISecret
 > 
-❌ Keys has detected a missing keychain value.
+❌ Chimney has detected a missing keychain value.
 🔑 What is the key for SuperSecret1
 > 
 ✅ All keys found. Ready to generate.
@@ -64,13 +64,13 @@ The first time, it will ask you to provide values for each key.
 These values will be stored in your macOS keychain.
 
 Options:
-  - -s, --spec: An optional path to a `.yml` key spec. Defaults to `keys.yml`
+  - -s, --spec: An optional path to a `.yml` key spec. Defaults to `chimney.yml`
 
 ### Generate
 
 Once your keys are setup, running `generate`:
 ```
-keys generate
+chimney generate
 🏭 Generating MyProjectKeys.swift...
 ```
 
@@ -109,12 +109,12 @@ If you want to ensure that the file is kept up to date automatically, add a Run 
 2. On the Build Phases tab, press the `+` button.
 3. Select `New Run Script Phase`.
 4. Drag the newly created `Run Script` entry so it is above `Compile Sources`.
-5. Enter `keys generate` in the script editor. (Or if using Mint, `mint run livefront/keys keys generate`.)
+5. Enter `keys generate` in the script editor. (Or if using Mint, `mint run livefront/chimney chimney generate`.)
 
 #### Xcodegen
 
 1. In your `project.yml`, add a path to your generated class in the app's main target with the flag `optional: true`.
-2. Add a script to your `preBuildScripts` section that runs `keys generate`. (Or if using Mint, `mint run livefront/keys keys generate`.)
+2. Add a script to your `preBuildScripts` section that runs `chimney generate`. (Or if using Mint, `mint run livefront/chimney chimney generate`.)
 
 Example `project.yml`:
 ```yml
@@ -131,7 +131,7 @@ targets:
 
 ## Continuous integration
 
-When running on an environment where you don't have access to the Keychain, such as a CI server, you can also define environment variables which will be used instead to generate the Swift class. The names of the variables must match the names of the keys you have specified in `keys.yml`.
+When running on an environment where you don't have access to the Keychain, such as a CI server, you can also define environment variables which will be used instead to generate the Swift class. The names of the variables must match the names of the keys you have specified in `chimney.yml`.
 
 ## Attributions
 
