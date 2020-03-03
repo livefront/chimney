@@ -90,7 +90,7 @@ class MyProjectKeys {
 
 Options: 
    - -o, --output: The output file. Defaults to [KeySpecName]Keys.swift
-   - -s, --spec: An optional path to a `.yml` key spec. Defaults to `keys.yml`.
+   - -s, --spec: An optional path to a `.yml` key spec. Defaults to `chimney.yml`.
    
 ### Integration
 
@@ -109,7 +109,7 @@ If you want to ensure that the file is kept up to date automatically, add a Run 
 2. On the Build Phases tab, press the `+` button.
 3. Select `New Run Script Phase`.
 4. Drag the newly created `Run Script` entry so it is above `Compile Sources`.
-5. Enter `keys generate` in the script editor. (Or if using Mint, `mint run livefront/chimney chimney generate`.)
+5. Enter `chimney generate` in the script editor. (Or if using Mint, `mint run livefront/chimney chimney generate`.)
 
 #### Xcodegen
 
@@ -125,8 +125,8 @@ targets:
       - path: MyProjectKeys.swift
         optional: true
     preBuildScripts:
-      - script: keys generate
-        name: Keys
+      - script: chimney generate
+        name: Chimney
 ```
 
 ## Continuous integration
