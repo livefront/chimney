@@ -10,7 +10,7 @@ class SetupCommand: Command {
     let spec = Key<Path>(
         "-s",
         "--spec",
-        description: "The path to the key spec file. Defaults to keys.yml"
+        description: "The path to the key spec file. Defaults to chimney.yml"
     )
 
     func execute() throws {

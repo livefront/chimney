@@ -1,7 +1,7 @@
 import XCTest
 import class Foundation.Bundle
 
-final class KeysTests: XCTestCase {
+final class ChimneyTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
@@ -12,7 +12,7 @@ final class KeysTests: XCTestCase {
             return
         }
 
-        let fooBinary = productsDirectory.appendingPathComponent("Keys")
+        let fooBinary = productsDirectory.appendingPathComponent("Chimney")
 
         let process = Process()
         process.executableURL = fooBinary
@@ -26,7 +26,7 @@ final class KeysTests: XCTestCase {
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: data, encoding: .utf8)
 
-        XCTAssertEqual(output, "Hello, world!\n")
+        XCTAssertEqual(output, "")
     }
 
     /// Returns path to the built products directory.

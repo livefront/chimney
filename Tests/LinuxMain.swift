@@ -1,7 +1,7 @@
 import XCTest
 
-import KeysTests
+import ChimneyTests
 
 var tests = [XCTestCaseEntry]()
-tests += KeysTests.allTests()
+tests += ChimneyTests.allTests()
 XCTMain(tests)
