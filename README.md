@@ -92,6 +92,17 @@ Options:
    - -o, --output: The output file. Defaults to [KeySpecName]Keys.swift
    - -s, --spec: An optional path to a `.yml` key spec. Defaults to `chimney.yml`.
    
+### Get
+
+As an alternative to accessing secrets at runtime via the generated file, `get` can be used to get a secret for a key. This enables build time scripts to access secrets.
+
+```
+chimney get <key>
+```
+
+Options:
+  - -s, --spec: An optional path to a `.yml` key spec. Defaults to `chimney.yml`
+
 ### Integration
 
 Once the file is generated, go ahead and add it to your project in Xcode, but also make sure to add it to your `.gitignore`:
