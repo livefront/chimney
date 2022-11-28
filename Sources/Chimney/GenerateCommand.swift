@@ -40,7 +40,7 @@ class GenerateCommand: Command {
             bundlePath,
             bundlePath + relativePath
         ])
-        let environment = Environment(loader: fsLoader)    
+        let environment = Environment(loader: fsLoader)
         let rendered = try environment.renderTemplate(name: "chimney.stencil", context: context)
         try outputPath.write(rendered)
     }
