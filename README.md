@@ -49,6 +49,10 @@ Run `setup`:
 ```
 chimney setup
 ```
+or (if installed via Mint)
+```
+mint run chimney setup
+```
 
 The first time, it will ask you to provide values for each key.
 ```
@@ -71,6 +75,11 @@ Options:
 Once your keys are setup, running `generate`:
 ```
 chimney generate
+🏭 Generating MyProjectKeys.swift...
+```
+or (if installed via Mint)
+```
+mint run chimney generate
 🏭 Generating MyProjectKeys.swift...
 ```
 
@@ -98,6 +107,10 @@ As an alternative to accessing secrets at runtime via the generated file, `get` 
 
 ```
 chimney get <key>
+```
+or (if installed via Mint)
+```
+mint run chimney get <key>
 ```
 
 Options:
