@@ -25,6 +25,8 @@ class SetupCommand: Command {
                 stdout <<< "🔑 What is the key for \(key, color: .green)"
                 var input = Input.readLine(prompt: ">", secure: true)
 
+                // Working around an issue in SwiftCLI which limits secure input to 128 characters.
+                // (https://github.com/jakeheis/SwiftCLI/issues/109)
                 if input.count == 128 {
                     stdout <<< "🚨 That key was too long for secure input. Please enter it again (will be visible)."
                     input = Input.readLine(prompt: ">", secure: false)
