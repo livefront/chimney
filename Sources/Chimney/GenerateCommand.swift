@@ -20,14 +20,27 @@ class GenerateCommand: Command {
         description: "The output file. Defaults to [keyspec name]Keys.swift"
     )
 
+    @Flag(
+        "-d",
+        "--dummy",
+        description: "Indicates if dummy keys with the value 'xxxx' should be generated instead of referencing KeyChain for the keys. Defaults to false."
+    )
+    var dummy: Bool
+
     func execute() throws {
         let keySpec = try KeySpec(path: spec.value)
         let outputPath = (output.value ?? keySpec.outputPath).absolute()
 
         stdout <<< "🏭 Generating \(outputPath)..."
 
-        let keyStore = KeyStore(spec: keySpec)
-        let keys = try keyStore.generate()
+        let keys: [KeyEntry]
+        if dummy {
+            let dummyKeyStore = DummyKeyStore(spec: keySpec)
+            keys = dummyKeyStore.generate()
+        } else {
+            let keyStore = KeyStore(spec: keySpec)
+            keys = try keyStore.generate()
+        }
         let context: [String: Any] = [
             "name": keySpec.name,
             "keys": keys
