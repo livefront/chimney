@@ -100,6 +100,7 @@ class MyProjectKeys {
 Options: 
    - -o, --output: The output file. Defaults to [KeySpecName]Keys.swift
    - -s, --spec: An optional path to a `.yml` key spec. Defaults to `chimney.yml`.
+   - -d, --dummy: Pass in a `String` that is used as a dummy value for all keys instead of referencing KeyChain for the keys.
    
 ### Get
 
